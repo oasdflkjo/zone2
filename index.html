@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zone 2 HR Calculator</title>
+</head>
+
+<body>
+
+    <header>
+        <h2>Zone 2 Heart Rate Calculator</h2>
+    </header>
+
+    <main class="calculator-content">
+        <section class="intro">
+            <p>This calculator uses the <strong>Karvonen Method</strong> to determine heart rate zones.<sup><a
+                        href="#ref1">1</a></sup></p>
+            <p>The <strong>Karvonen Method</strong>, or Heart Rate Reserve method, was developed by Dr. Martti Karvonen
+                from Finland. It calculates training intensities by considering both your maximum heart rate (MHR) and
+                your resting heart rate (RHR). By taking into account your RHR, this method provides a more
+                individualized measure of exercise intensity.<sup><a href="#ref1">1</a></sup></p>
+
+            <p>
+                Zone 2 training, often referred to as aerobic or endurance training, is instrumental in building an
+                athlete's aerobic capacity. It helps in improving the efficiency of the cardiovascular system, allowing
+                the body to transport and use oxygen more effectively during exercise. This training zone also promotes
+                fat metabolism, increases capillary density in muscles, and aids in the development and maintenance of a
+                strong aerobic base, which is crucial for supporting higher-intensity efforts. Such adaptations can lead
+                to enhanced endurance, better exercise recovery, and a lower risk of overtraining. Over time, consistent
+                Zone 2 training can contribute to improvements in both short-duration, high-intensity events and longer
+                endurance races<sup><a href="#ref3">3</a></sup><sup><a href="#ref4">4</a></sup>.
+            </p>
+
+
+        </section>
+
+        <section class="input-section">
+            <label for="age">Enter your age:</label>
+            <input type="number" id="age" name="age" min="1" max="120">
+            <br><br>
+
+            <label for="rhr">Enter your resting heart rate (if unknown, refer to the average RHR chart below):</label>
+            <input type="number" id="rhr" name="rhr" min="30" max="100">
+            <br><br>
+
+            <button onclick="calculateZone2()">Calculate Zone 2 HR</button>
+
+            <p id="output"></p>
+        </section>
+
+        <section class="rhr-guide">
+            <h3>Average Resting Heart Rate (RHR) by Age:</h3>
+            <ul>
+                <li>Young adults: 60-80 bpm<sup><a href="#ref2">2</a></sup></li>
+                <li>Adults: 60-100 bpm<sup><a href="#ref2">2</a></sup></li>
+                <li>Seniors: 50-60 bpm<sup><a href="#ref2">2</a></sup></li>
+            </ul>
+        </section>
+    </main>
+
+    <footer class="references">
+        <h3>References:</h3>
+        <p id="ref1">[1] Karvonen, M. J., Kentala, E., & Mustala, O. (1957). The effects of training on heart rate: a
+            longitudinal study. <i>Annals of medicine experimentalis et biologiae Fenniae</i>. <a
+                href="https://pubmed.ncbi.nlm.nih.gov/13470504/" target="_blank" rel="noopener noreferrer">View on
+                PubMed</a></p>
+        <p id="ref2">[2] Fox, S. M., Naughton, J. P., & Haskell, W. L. (1971). Physical activity and the prevention of
+            coronary heart disease. <i>Annals of clinical research</i>, 3(6), 404-432. <a
+                href="https://pubmed.ncbi.nlm.nih.gov/4945367/" target="_blank" rel="noopener noreferrer">View on
+                PubMed</a></p>
+        <p id="ref3">[3] Seiler, S., & Kjerland, G. Ø. (2006). Quantifying training intensity distribution in elite
+            endurance athletes: Is there evidence for an optimal distribution?. <i>Scandinavian journal of medicine &
+                science in sports</i>, 16(1), 49-56. <a
+                href="https://onlinelibrary.wiley.com/doi/full/10.1111/j.1600-0838.2004.00418.x" target="_blank"
+                rel="noopener noreferrer">View Source</a></p>
+        <p id="ref4">[4] Laursen, P. B., & Jenkins, D. G. (2002). The scientific basis for high-intensity interval
+            training: Optimising training programmes and maximising performance in highly trained endurance athletes.
+            <i>Sports medicine</i>, 32(1), 53-73. <a href="https://pubmed.ncbi.nlm.nih.gov/11772161/" target="_blank"
+                rel="noopener noreferrer">View on PubMed</a>
+        </p>
+
+    </footer>
+
+
+    <script>
+        function calculateZone2() {
+            let age = parseInt(document.getElementById("age").value);
+            let rhr = parseInt(document.getElementById("rhr").value);
+
+            // MHR calculation based on the formula: MHR = 220 - age
+            let mhr = 220 - age;
+
+            let hrr = mhr - rhr;
+
+            let lowerZone2 = rhr + 0.60 * hrr;
+            let upperZone2 = rhr + 0.70 * hrr;
+
+            document.getElementById("output").innerHTML =
+                `Using the Karvonen Method (MHR = 220 - age) with an age of ${age} and a resting heart rate of ${rhr} bpm:<br>` +
+                `Your Zone 2 heart rate range is approximately ${lowerZone2.toFixed(2)} bpm to ${upperZone2.toFixed(2)} bpm.`;
+        }
+    </script>
+
+</body>
+
+</html>
